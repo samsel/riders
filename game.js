@@ -1936,11 +1936,11 @@ function BI(ID) {
             BB.style.display = "block";
             V = "line";
         } else {
-            var request = new XMLHttpRequest;
-            request.open("POST", "js/load.php", false);
-            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.send("track=" + this.ID);
-            var Cv = request.responseText;
+            // var request = new XMLHttpRequest;
+            // request.open("POST", "http://canvasrider.com/js/load.php", false);
+            // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // request.send("track=" + this.ID);
+            var Cv = gameData;
         }
     }
     var C = Cv.split("#");
@@ -2441,9 +2441,9 @@ BI.prototype.Bt = function () {
     }
     return AG.substr(0, AG.length - 1) + "#" + AL.substr(0, AL.length - 1) + "#" + AD.substr(0, AD.length - 1) + "#" + B3;
 };
-if (location.href.substr(0, 22) != "http://canvasrider.com") {
-    location.href = "http://canvasrider.com";
-}
+// if (location.href.substr(0, 22) != "http://canvasrider.com") {
+//     location.href = "http://canvasrider.com";
+// }
 if (!document.createElement("canvas").getContext) {
     location.href = "http://canvasrider.com/error";
 }
@@ -2517,7 +2517,7 @@ function AO() {
 
 function watchGhost(DX) {
     var request = new XMLHttpRequest;
-    request.open("POST", "js/load.php", false);
+    request.open("POST", "http://canvasrider.com/js/load.php", false);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send("track=" + C.ID + "&ghost=" + DX);
     var DW = request.responseText;

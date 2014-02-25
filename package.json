@@ -1,7 +1,7 @@
 {
-  "name": "people-dj",
+  "name": "riders",
   "version": "0.0.1",
-  "description": "people controlled video dj app",
+  "description": "port of canvasrider.com game to a multiplayer version desktop game using node_webkit",
   "main": "index.html",
   "node-main": "index.js",
   "scripts": {
@@ -9,23 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/samsel/people-dj.git"
+    "url": "https://github.com/samsel/riders.git"
   },
   "author": "Sam Selvanathan",
   "license": "BSD-2-Clause",
   "window": {
-    "title": "People DJ",
-    "toolbar": true,
+    "title": "Riders",
+    "toolbar": false,
     "frame": false,
-    "width": 800,
-    "height": 500,
+    "width": 1000,
+    "height": 800,
     "position": "mouse",
-    "min_width": 400,
-    "min_height": 200,
-    "max_width": 800,
-    "max_height": 600
-  },
-  "webkit": {
-    "plugin": true
+    "resizable": false
   }
 }

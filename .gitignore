@@ -1,0 +1,12 @@
+node_modules
+.build
+.idea
+.project
+.settings
+logs
+*.log
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+build/

@@ -1,0 +1,31 @@
+{
+  "name": "people-dj",
+  "version": "0.0.1",
+  "description": "people controlled video dj app",
+  "main": "index.html",
+  "node-main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samsel/people-dj.git"
+  },
+  "author": "Sam Selvanathan",
+  "license": "BSD-2-Clause",
+  "window": {
+    "title": "People DJ",
+    "toolbar": true,
+    "frame": false,
+    "width": 800,
+    "height": 500,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 800,
+    "max_height": 600
+  },
+  "webkit": {
+    "plugin": true
+  }
+}

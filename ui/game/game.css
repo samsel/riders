@@ -1,0 +1,18 @@
+body {
+	width: 800px;
+	height: 325px;
+	overflow:hidden;
+}
+
+#toolbar1 {
+	position: absolute; 
+	display: block; 
+	z-index: 2; 
+	top: 246px; 
+	left: 270px;
+}
+
+#toolbar1 {
+	top: 246px; 
+	left: 948px;
+}

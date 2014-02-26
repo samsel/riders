@@ -1,5 +1,6 @@
 var socket = io.connect(window.location.origin),
 	info = $("#info"),
+	playerInfo = $("#playerInfo"),
 	controls = $(".key");
 
 controls.on("mousedown touchstart", function (e) {
@@ -20,6 +21,12 @@ controls.on("mouseup touchend", function (e) {
 
 socket.on("controlMsg", function (data) {
 	info.html(data.msg);
+	if(data.playerInfo) {
+		playerInfo.html(data.playerInfo);
+	}
+	if(data.reset) {
+		playerInfo.html("");
+	}	
 });
 
 document.addEventListener("touchstart", function() {},false);

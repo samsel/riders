@@ -77,19 +77,23 @@
 				players.push(socket.id);
 				if (players.length === maxPlayers) {
 					game.start();
+					socket.emit("controlMsg", {
+						playerInfo: "You are Player-" + players.length
+					});						
 					websocket.sockets.emit("controlMsg", {
 						msg: "Game started!"
 					});								
 				}
 				else {
 					socket.emit("controlMsg", {
-						msg: "waiting for more players to join!"
+						playerInfo: "You are Player-" + players.length,
+						msg: "Waiting for more players to Join!" 
 					});	
 				}	
 			}		
 			else {
 				socket.emit("controlMsg", {
-					msg: "max players limit reached!"
+					msg: "Game in Progress! Max players limit reached!"
 				});				
 			}
 			
@@ -107,6 +111,7 @@
 			game.reset();
 			players = [];
 			websocket.sockets.emit("controlMsg", { 
+				reset: true,
 				msg: "Reset the game! Lets start over!" 
 			});	
 		}, false);

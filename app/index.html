@@ -5,6 +5,7 @@
 </head>
 <body>
 	<div id="info">Waiting for Players to join..</div>
+	<a id="reset" href="#">RESET</a>
 	<div class="box"><iframe id="player1" src="game/game.html" class="frame"></iframe></div>
 	<div class="box"><iframe id="player2" src="game/game.html" class="frame"></iframe></div>
 	<div class="box"><iframe id="player3" src="game/game.html" class="frame"></iframe></div>
@@ -17,23 +18,34 @@
 			var players = [],
 				info = document.getElementById("info");
 
-			var processEvent = function (data, id) {
-				players[id].contentWindow.postMessage(JSON.stringify(data), '*');
-			};
-
-			var start = function () {
-				info.innerHTML = "Game started!";
-			};
-
-			var getPlayerCount = function () {
-				players = document.getElementsByTagName("iframe");
-				return players.length;
-			};		
-
 			return {
-				processEvent:processEvent,
-				start: start,
-				getPlayerCount: getPlayerCount
+
+				processEvent: function (data, id) {
+					players[id].contentWindow.postMessage(JSON.stringify(data), '*');
+				},
+
+				start: function () {
+					info.innerHTML = "Game started!";
+				},
+
+				getPlayerCount: function () {
+					players = document.getElementsByTagName("iframe");
+					return players.length;
+				},
+
+				reset: function () {
+					var _players = Array.prototype.slice.call(players, 0); 
+					_players.map(function(player) {
+						player.contentWindow.postMessage(JSON.stringify({
+							eventName: "keydown",
+							keyCode: "13",
+						}), '*');
+						player.contentWindow.postMessage(JSON.stringify({
+							eventName: "keyup",
+							keyCode: "13",
+						}), '*');					
+					});
+				}
 			};
 		
 		})();
@@ -63,9 +75,6 @@
 		websocket.sockets.on("connection", function (socket) {
 			if(players.length < maxPlayers) {
 				players.push(socket.id);
-				socket.emit("error", {
-						msg: "waiting for more players to join!"
-				});	
 			}		
 			else {
 				socket.emit("error", {
@@ -74,15 +83,34 @@
 			}
 
 			if (players.length === maxPlayers) {
-				game.start();			
+				game.start();
+				socket.emit("error", {
+					msg: "Game started!"
+				});								
+			}
+			else {
+				socket.emit("error", {
+					msg: "waiting for more players to join!"
+				});	
 			}	
 			
 			socket.on("event", function (data) {
 				if(players.length === maxPlayers) {
-					game.processEvent(data, players.indexOf(socket.id));
+					var index = players.indexOf(socket.id);
+					if (index !== -1) {
+						game.processEvent(data, index);
+					}
 				}							
 			});
 		});
+
+		document.getElementById("reset").addEventListener("click", function() {
+			game.reset();
+			players = [];
+			websocket.sockets.emit("error", { 
+				msg: "Reset the game! Lets start over!" 
+			});	
+		}, false);
 
 	})();
 

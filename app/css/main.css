@@ -67,3 +67,15 @@ body {
   text-align: center;
   margin-top:15px;
 }
+
+#reset {
+  position: absolute;
+  padding:3px 12px;
+  top: 2px;
+  right: 0px;
+  color: #F08080;
+  text-decoration: none;
+  text-align: center;
+  font-size: 12px;
+  font-weight: lighter;
+}

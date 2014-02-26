@@ -10,9 +10,11 @@ body {
 	z-index: 2; 
 	top: 246px; 
 	left: 270px;
+	visibility:hidden;
 }
 
-#toolbar1 {
+#toolbar2 {
 	top: 246px; 
 	left: 948px;
+	visibility:hidden;
 }

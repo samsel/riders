@@ -13,6 +13,8 @@ app.get('/', function (req, res) {
 
 websocket.set('loglevel', 10);
 
-websocket.on('connection', function(socket) {
-  socket.emit('init',{msg:"test"});
+websocket.sockets.on("connection", function (socket) {
+  socket.on("event", function (data) {
+    console.dir(data);
+  });
 });

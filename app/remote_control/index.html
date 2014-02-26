@@ -1,13 +1,30 @@
 <html>
 <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1, initial-scale=1.0, maximum-scale=1, user-scalable=no minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 	<link href="index.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="up" class="key" data-key-code="38">up</div>
-	<div id="down" class="key" data-key-code="40">down</div>
-	<div id="left" class="key" data-key-code="37">left</div>
-	<div id="right" class="key" data-key-code="39">right</div>
-	<div id="direction" class="key" data-key-code="90">direction</div>
+	<h1>Riders Remote</h1>
+	<div class="wrapper">
+		<a href="#" class="button button-rounded button-flat hide"></a>
+		<a href="#" class="button button-rounded button-flat key" data-key-code="38">Up</a>
+		<a href="#" class="button button-rounded button-flat hide"></a>
+
+		<a href="#" class="button button-rounded button-flat key" data-key-code="37">Left</a>
+		<a href="#" class="button button-rounded button-flat hide"></a>
+		<a href="#" class="button button-rounded button-flat key" data-key-code="39">Right</a>
+
+		<a href="#" class="button button-rounded button-flat hide"></a>
+		<a href="#" class="button button-rounded button-flat key" data-key-code="40">Down</a>
+		<a href="#" class="button button-rounded button-flat hide"></a>
+
+		<a href="#" class="button button-rounded button-flat key direction" data-key-code="90">Direction</a>
+	</div>
+	
+
 	<script type="text/javascript" src="socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="index.js"></script>

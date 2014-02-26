@@ -1,6 +1,6 @@
-var socket = io.connect('http://localhost:8887');
+var socket = io.connect(window.location.origin);
 
-$(".key").on("mousedown", function (e) {
+$("a").on("mousedown touchstart", function (e) {
 	var key = $(e.target);
 	socket.emit("event", { 
 		keyCode: key.attr("data-key-code"),
@@ -8,7 +8,7 @@ $(".key").on("mousedown", function (e) {
 	});
 });
 
-$(".key").on("mouseup", function (e) {
+$("a").on("mouseup touchend", function (e) {
 	var key = $(e.target);
 	socket.emit("event", { 
 		keyCode: key.attr("data-key-code"),
@@ -16,6 +16,8 @@ $(".key").on("mouseup", function (e) {
 	});
 });
 
-socket.on("error", function (data) {
+socket.on("controlMsg", function (data) {
 	alert(data.msg);
 });
+
+document.addEventListener("touchstart", function() {},false);

@@ -3,21 +3,24 @@ html, body {
 	margin:0;
 	width: 100%;
 	height: 100%;
+  overflow: hidden;
 }
 
 .frame {
 	background:white;
 	width:100%;
 	height:100%;
-	border:0;
+  border-radius: 2px;
+  border: 1px solid transparent;
 }
 
 .box {
-	width:800px;
+	width:520px;
 	height:325px;
-	margin-top:50px;
+	margin-top:30px;
 	margin-left:50px;
-  	position: relative;
+  position: relative;
+  float: left;
 }
 
 .box:before, .box:after {
@@ -29,10 +32,10 @@ html, body {
   width: 50%;
   top: 80%;
   max-width:300px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  -moz-box-shadow: 0 15px 10px #777;
-  box-shadow: 0 15px 10px #777;
+  background: #555;
+  -webkit-box-shadow: 0 15px 10px #555;
+  -moz-box-shadow: 0 15px 10px #555;
+  box-shadow: 0 15px 10px #555;
   -webkit-transform: rotate(-3deg);
   -moz-transform: rotate(-3deg);
   -o-transform: rotate(-3deg);
@@ -48,4 +51,19 @@ html, body {
   transform: rotate(3deg);
   right: 10px;
   left: auto;
+}
+
+body {
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(167,207,223,1)), color-stop(100%,rgba(35,83,138,1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(167,207,223,1) 0%,rgba(35,83,138,1) 100%); /* Chrome10+,Safari5.1+ */
+}
+
+#info {
+  width:100%;
+  height:18px;
+  line-height:18px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  margin-top:15px;
 }

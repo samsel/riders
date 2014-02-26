@@ -17,7 +17,7 @@
   },
   "window": {
     "title": "Riders",
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
     "width": 1200,
     "height": 800,

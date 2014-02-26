@@ -1,13 +1,42 @@
 <html>
 <head>
 	<link href="css/main.css" rel="stylesheet" />
+	<link href="css/animate.css" rel="stylesheet" />
 </head>
 <body>
 	<div id="info">Waiting for Players to join..</div>
 	<div class="box"><iframe id="player1" src="game/game.html" class="frame"></iframe></div>
 	<div class="box"><iframe id="player2" src="game/game.html" class="frame"></iframe></div>
+	<div class="box"><iframe id="player3" src="game/game.html" class="frame"></iframe></div>
+	<div class="box"><iframe id="player4" src="game/game.html" class="frame"></iframe></div>
 
 	<script type="text/javascript">
+
+		var game = (function() {
+
+			var players = [],
+				info = document.getElementById("info");
+
+			var processEvent = function (data, id) {
+				players[id].contentWindow.postMessage(JSON.stringify(data), '*');
+			};
+
+			var start = function () {
+				info.innerHTML = "Game started!";
+			};
+
+			var getPlayerCount = function () {
+				players = document.getElementsByTagName("iframe");
+				return players.length;
+			};		
+
+			return {
+				processEvent:processEvent,
+				start: start,
+				getPlayerCount: getPlayerCount
+			};
+		
+		})();
 
 		var remoteControlNetwork = (function() {
 
@@ -16,7 +45,7 @@
 	 		app = express(),
 			server = app.listen(8887),
 			websocket = require('socket.io').listen(server),
-			maxPlayers = 2,
+			maxPlayers = game.getPlayerCount(),
 			players = [];
 
 		app.set("view options", {layout: false});
@@ -37,15 +66,16 @@
 				socket.emit("error", {
 						msg: "waiting for more players to join!"
 				});	
-			}
-			else if (players.length === maxPlayers) {
-				game.start();			
-			}			
+			}		
 			else {
 				socket.emit("error", {
 					msg: "max players limit reached!"
 				});				
 			}
+
+			if (players.length === maxPlayers) {
+				game.start();			
+			}	
 			
 			socket.on("event", function (data) {
 				if(players.length === maxPlayers) {
@@ -54,27 +84,6 @@
 			});
 		});
 
-	})();
-
-
-	var game = (function() {
-
-		var players = [document.getElementById("player1"), document.getElementById("player2")],
-			info = document.getElementById("info");
-
-		var processEvent = function (data, id) {
-			players[id].contentWindow.postMessage(JSON.stringify(data), '*');
-		};
-
-		var start = function () {
-			info.innerHTML = "Game started!";
-		};		
-
-		return {
-			processEvent:processEvent,
-			start: start
-		};
-		
 	})();
 
 	</script>

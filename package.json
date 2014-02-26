@@ -13,7 +13,8 @@
   "author": "Sam Selvanathan",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "express": "3.4.8"
+    "express": "3.4.8",
+    "socket.io": "~0.9.16"
   },
   "window": {
     "title": "Riders",
@@ -26,7 +27,6 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-shell": "~0.6.4",
-    "socket.io": "~0.9.16"
+    "grunt-shell": "~0.6.4"
   }
 }

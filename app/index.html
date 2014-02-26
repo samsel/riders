@@ -1,10 +1,9 @@
 <html>
 <head>
 	<link href="css/main.css" rel="stylesheet" />
-	<link href="css/animate.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="info">Waiting for Players to join..</div>
+	<div id="info"></div>
 	<a id="reset" href="#">RESET</a>
 	<div class="box">Player 1<iframe id="player1" src="game/game.html" class="frame"></iframe></div>
 	<div class="box">Player 2<iframe id="player2" src="game/game.html" class="frame"></iframe></div>
@@ -16,7 +15,10 @@
 		var game = (function() {
 
 			var players = [],
+				infoText = "Waiting for Players to join..",
 				info = document.getElementById("info");
+
+			info.innerHTML = infoText;
 
 			return {
 
@@ -45,6 +47,7 @@
 							keyCode: "13",
 						}), '*');					
 					});
+					info.innerHTML = infoText;
 				}
 			};
 		

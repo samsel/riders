@@ -3,6 +3,7 @@
 	<link href="css/main.css" rel="stylesheet" />
 </head>
 <body>
+	<div id="info">Waiting for Players to join..</div>
 	<div class="box"><iframe id="player1" src="game/game.html" class="frame"></iframe></div>
 	<div class="box"><iframe id="player2" src="game/game.html" class="frame"></iframe></div>
 
@@ -14,7 +15,9 @@
 	  		http = require('http');
 	 		app = express(),
 			server = app.listen(8887),
-			websocket = require('socket.io').listen(server);
+			websocket = require('socket.io').listen(server),
+			maxPlayers = 2,
+			players = [];
 
 		app.set("view options", {layout: false});
 
@@ -27,26 +30,49 @@
 
 		websocket.set('loglevel', 10);
 
+
 		websocket.sockets.on("connection", function (socket) {
-		  socket.on("event", function (data) {
-		    gameNetwork.processEvent(data);
-		  });
+			if(players.length < maxPlayers) {
+				players.push(socket.id);
+				socket.emit("error", {
+						msg: "waiting for more players to join!"
+				});	
+			}
+			else if (players.length === maxPlayers) {
+				game.start();			
+			}			
+			else {
+				socket.emit("error", {
+					msg: "max players limit reached!"
+				});				
+			}
+			
+			socket.on("event", function (data) {
+				if(players.length === maxPlayers) {
+					game.processEvent(data, players.indexOf(socket.id));
+				}							
+			});
 		});
 
 	})();
 
 
-	var gameNetwork = (function() {
+	var game = (function() {
 
-		var player1 = document.getElementById("player1"),
-			player2 = document.getElementById("player2");
+		var players = [document.getElementById("player1"), document.getElementById("player2")],
+			info = document.getElementById("info");
 
-		var processEvent = function (data) {
-			player1.contentWindow.postMessage(JSON.stringify(data), '*');
+		var processEvent = function (data, id) {
+			players[id].contentWindow.postMessage(JSON.stringify(data), '*');
 		};
 
+		var start = function () {
+			info.innerHTML = "Game started!";
+		};		
+
 		return {
-			processEvent:processEvent
+			processEvent:processEvent,
+			start: start
 		};
 		
 	})();

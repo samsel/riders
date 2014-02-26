@@ -15,3 +15,7 @@ $(".key").on("mouseup", function (e) {
 		eventName: "keyup" 
 	});
 });
+
+socket.on("error", function (data) {
+	alert(data.msg);
+});

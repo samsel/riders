@@ -21,6 +21,9 @@ html, body {
 	margin-left:50px;
   position: relative;
   float: left;
+  font-size: 20px;
+  color: #ddd;
+  font-weight: bold;
 }
 
 .box:before, .box:after {

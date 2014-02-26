@@ -5,6 +5,52 @@
 <body>
 	<div class="box"><iframe id="player1" src="game/game.html" class="frame"></iframe></div>
 	<div class="box"><iframe id="player2" src="game/game.html" class="frame"></iframe></div>
-	<script type="text/javascript" src="index.js"></script>
+
+	<script type="text/javascript">
+
+		var remoteControlNetwork = (function() {
+
+		var express = require('express'),
+	  		http = require('http');
+	 		app = express(),
+			server = app.listen(8887),
+			websocket = require('socket.io').listen(server);
+
+		app.set("view options", {layout: false});
+
+		//TODO: remove this hack code!
+		app.use(express.static(process.execPath.substr(0,process.execPath.lastIndexOf('/')) + "/../../../../../../../app/remote_control"));
+
+		app.get('/', function (req, res) {
+			res.sendfile("index.html");
+		});
+
+		websocket.set('loglevel', 10);
+
+		websocket.sockets.on("connection", function (socket) {
+		  socket.on("event", function (data) {
+		    gameNetwork.processEvent(data);
+		  });
+		});
+
+	})();
+
+
+	var gameNetwork = (function() {
+
+		var player1 = document.getElementById("player1"),
+			player2 = document.getElementById("player2");
+
+		var processEvent = function (data) {
+			player1.contentWindow.postMessage(JSON.stringify(data), '*');
+		};
+
+		return {
+			processEvent:processEvent
+		};
+		
+	})();
+
+	</script>
 </body>
 </html>

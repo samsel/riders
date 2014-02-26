@@ -18,7 +18,7 @@
   },
   "window": {
     "title": "Riders",
-    "toolbar": false,
+    "toolbar": true,
     "frame": true,
     "width": 1200,
     "height": 800,
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-shell": "~0.6.4"
+    "grunt-shell": "~0.6.4",
+    "socket.io": "~0.9.16"
   }
 }

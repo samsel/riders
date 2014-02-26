@@ -15,5 +15,18 @@
 	<script type="text/javascript" src="data.js"></script>
 	<script type="text/javascript" src="game.js"></script>
 	<script type="text/javascript">canvas_ride(561613);</script>
+	<script type="text/javascript">
+		window.onmessage = function(e) {
+			var evt = document.createEvent("Events");
+			evt.initEvent("keydown", true, true);
+			evt.view = window;
+			evt.altKey = false;
+			evt.ctrlKey = false;
+			evt.shiftKey = false;
+			evt.metaKey = false;
+			evt.keyCode = 38;
+			document.dispatchEvent(evt);
+		};
+	</script>
 </body>
 </html>

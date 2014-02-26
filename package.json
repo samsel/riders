@@ -19,10 +19,14 @@
   "window": {
     "title": "Riders",
     "toolbar": false,
-    "frame": false,
-    "width": 1000,
+    "frame": true,
+    "width": 1200,
     "height": 800,
     "position": "mouse",
     "resizable": false
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-shell": "~0.6.4"
   }
 }

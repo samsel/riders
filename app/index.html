@@ -75,24 +75,23 @@
 		websocket.sockets.on("connection", function (socket) {
 			if(players.length < maxPlayers) {
 				players.push(socket.id);
+				if (players.length === maxPlayers) {
+					game.start();
+					websocket.sockets.emit("error", {
+						msg: "Game started!"
+					});								
+				}
+				else {
+					socket.emit("error", {
+						msg: "waiting for more players to join!"
+					});	
+				}	
 			}		
 			else {
 				socket.emit("error", {
 					msg: "max players limit reached!"
 				});				
 			}
-
-			if (players.length === maxPlayers) {
-				game.start();
-				socket.emit("error", {
-					msg: "Game started!"
-				});								
-			}
-			else {
-				socket.emit("error", {
-					msg: "waiting for more players to join!"
-				});	
-			}	
 			
 			socket.on("event", function (data) {
 				if(players.length === maxPlayers) {
